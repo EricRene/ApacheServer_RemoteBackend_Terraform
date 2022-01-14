@@ -225,7 +225,7 @@ resource "aws_lb_target_group" "my_target_group" {
 resource "aws_instance" "web" {
   ami                    = "ami-001089eb624938d9f"
   instance_type          = "t2.micro"
-  subnet_id              = "aws_subnet.public_subnets[0].id"
+  subnet_id              = aws_subnet.public_subnets[0].id
   vpc_security_group_ids = ["${aws_security_group.web_server_sg.id}"]
   key_name               = "Task-9-KP"
 
