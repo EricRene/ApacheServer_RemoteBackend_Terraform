@@ -8,7 +8,7 @@ variable "aws_secret_key" {}
 variable "region" {}
 
 variable "bucket_name" {
-  default = "Task_9_backend_bucket"
+  default = "task_9_backend_bucket"
 }
 
 # //////////////////////////////
