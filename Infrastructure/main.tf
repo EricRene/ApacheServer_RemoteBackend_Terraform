@@ -226,11 +226,7 @@ resource "aws_instance" "web" {
   ami           = "ami-001089eb624938d9f"
   instance_type = "t2.micro"
 
-  tags = {
-    Name = "Task-9-Instance"
-  }
-
-  user_data = "
+  user_data = << EOF
 #!/bin/bash
 sudo apt-get update -y
 sudo apt-get install apache2 unzip -y
@@ -243,5 +239,11 @@ curl http://169.254.169.254/latest/meta-data/public-ipv4 >> /var/www/html/index.
 echo '</h3> <h3>Local IP: ' >> /var/www/html/index.html
 curl http://169.254.169.254/latest/meta-data/local-ipv4 >> /var/www/html/index.html
 echo '</h3></html> ' >> /var/www/html/index.html
-"
+
+EOF
+
+
+  tags = {
+    Name = "Task-9-Instance"
+  }
 }
