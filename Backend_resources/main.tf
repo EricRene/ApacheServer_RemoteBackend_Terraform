@@ -86,7 +86,7 @@ resource "aws_dynamodb_table" "tf_db_statelock" {
 # IAM POLICY
 # //////////////////////////////
 resource "aws_iam_user_policy" "terraform_user_dbtable" {
-  name = "Terraform"
+  name = "db-policy"
   user = data.aws_iam_user.terraform.user_name
   policy = <<EOF
 {
