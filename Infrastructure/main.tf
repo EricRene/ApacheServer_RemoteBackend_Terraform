@@ -229,7 +229,7 @@ resource "aws_lb_target_group_attachment" "target_group_attachment" {
 ////////////////////////////////////////
 
 resource "aws_instance" "web" {
-  ami                    = "ami-001089eb624938d9f"
+  ami                    = "ami-0fb653ca2d3203ac1"
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public_subnets[0].id
   vpc_security_group_ids = ["${aws_security_group.web_server_sg.id}"]
