@@ -237,6 +237,7 @@ resource "aws_instance" "web" {
 
 
   user_data = <<EOF
+  #!/bin/bash
   sudo apt-get update -y
   sudo apt-get install apache2 unzip -y
   sudo chgrp -R www-data /var/www/html
