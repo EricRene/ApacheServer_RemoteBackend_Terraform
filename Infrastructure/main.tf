@@ -225,7 +225,7 @@ resource "aws_lb_target_group" "my_target_group" {
 resource "aws_instance" "web" {
   ami                    = "ami-001089eb624938d9f"
   instance_type          = "t2.micro"
-  subnet_id              = "aws_subnet.public_subnets[0]"
+  # subnet_id              = "aws_subnet.public_subnets[0]"
   vpc_security_group_ids = [aws_security_group.web_server_sg.name]
   key_name               = "Task-9-KP"
 
@@ -245,10 +245,6 @@ curl http://169.254.169.254/latest/meta-data/local-ipv4 >> /var/www/html/index.h
 echo '</h3></html> ' >> /var/www/html/index.html
 
 EOF
-
-depends_on = [
-   aws_subnet.public_subnets
- ]
 
   tags = {
     Name = "Task-9-Instance"
