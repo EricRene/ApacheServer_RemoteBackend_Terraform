@@ -163,6 +163,15 @@ resource "aws_security_group" "web_server_sg" {
   description = "Web Server security group"
   vpc_id      = aws_vpc.my_vpc.id
 
+  ingress {
+  description      = "SSH"
+  from_port        = 22
+  to_port          = 22
+  protocol         = "tcp"
+  cidr_blocks      = ["0.0.0.0/0"]
+  ipv6_cidr_blocks = ["::/0"]
+}
+
   egress {
     from_port        = 0
     to_port          = 0
