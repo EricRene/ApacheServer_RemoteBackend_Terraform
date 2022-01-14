@@ -8,7 +8,7 @@ variable "aws_secret_key" {}
 variable "region" {}
 
 variable "bucket_name" {
-  default = "Task-9-Backend-Bucket"
+  default = "Task-9-backend-bucket"
 }
 
 # //////////////////////////////
@@ -30,7 +30,7 @@ data "aws_iam_user" "terraform" {
 # //////////////////////////////
 # S3 BUCKET
 # //////////////////////////////
-resource "aws_s3_bucket" "my-backend-bucket" {
+resource "aws_s3_bucket" "mybackendbucket" {
   bucket = var.bucket_name
   force_destroy = true
   acl = "private"
@@ -59,7 +59,7 @@ EOF
 }
 
 resource "aws_s3_bucket_public_access_block" "my-backend-bucket-tfremotestate" {
-  bucket = aws_s3_bucket.my-backend-bucket.id
+  bucket = aws_s3_bucket.mybackendbucket.id
 
   block_public_acls   = true
   block_public_policy = true
@@ -86,7 +86,7 @@ resource "aws_dynamodb_table" "tf_db_statelock" {
 # IAM POLICY
 # //////////////////////////////
 resource "aws_iam_user_policy" "terraform_user_dbtable" {
-  name = "terraform"
+  name = "Terraform"
   user = data.aws_iam_user.terraform.user_name
   policy = <<EOF
 {
