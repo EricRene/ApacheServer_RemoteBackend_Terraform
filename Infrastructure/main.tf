@@ -218,6 +218,12 @@ resource "aws_lb_target_group" "my_target_group" {
   vpc_id   = aws_vpc.my_vpc.id
 }
 
+resource "aws_lb_target_group_attachment" "target_group_attachment" {
+  target_group_arn = aws_lb_target_group.my_target_group.arn
+  target_id        = aws_instance.web.id
+  port             = 80
+}
+
 //////////////////////////////////////////
 // ------------ Instances ------------ //
 ////////////////////////////////////////
