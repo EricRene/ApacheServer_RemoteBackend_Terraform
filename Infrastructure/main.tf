@@ -246,6 +246,9 @@ echo '</h3></html> ' >> /var/www/html/index.html
 
 EOF
 
+depends_on = [
+   aws_subnet.public_subnets
+ ]
 
   tags = {
     Name = "Task-9-Instance"
