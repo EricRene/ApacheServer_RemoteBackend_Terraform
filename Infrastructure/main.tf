@@ -223,12 +223,12 @@ resource "aws_lb_target_group" "my_target_group" {
 ////////////////////////////////////////
 
 resource "aws_instance" "web" {
-  count = 1
-
   ami                    = "ami-001089eb624938d9f"
   instance_type          = "t2.micro"
-  subnet_id              = "192.168.${count.index}.0/24"
-  vpc_security_group_ids = [aws_security_group.web_server_sg.id]
+  subnet_id              = "192.168.0.0/24"
+  vpc_security_group_ids = [aws_security_group.web_server_sg.name]
+  key_name               = "Task-9-KP"
+
 
   user_data = <<EOF
 #!/bin/bash
