@@ -187,7 +187,7 @@ resource "aws_security_group_rule" "web_server_sg_rule" {
 ////////////////////////////////////////////////////
 
 resource "aws_lb" "my_alb" {
-  name               = "Task-4-1-ALB"
+  name               = "Task-9-ALB"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
@@ -212,7 +212,7 @@ resource "aws_lb_listener" "front_end" {
 }
 
 resource "aws_lb_target_group" "my_target_group" {
-  name     = "Task-5-Target-Group"
+  name     = "Task-9-Target-Group"
   port     = 80
   protocol = "HTTP"
   vpc_id   = aws_vpc.my_vpc.id
@@ -221,3 +221,27 @@ resource "aws_lb_target_group" "my_target_group" {
 //////////////////////////////////////////
 // ------------ Instances ------------ //
 ////////////////////////////////////////
+
+resource "aws_instance" "web" {
+  ami           = "ami-001089eb624938d9f"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "Task-9-Instance"
+  }
+
+  user_data = "
+#!/bin/bash
+sudo apt-get update -y
+sudo apt-get install apache2 unzip -y
+echo '<html><center><body bgcolor="black" text="#39ff14" style="font-family: Arial"><h1>Load Balancer Demo</h1><h3>This is a test container! > /var/www/html/index.html
+curl http://169.254.169.254/latest/meta-data/placement/availability-zone >> /var/www/html/index.html
+echo '</h3> <h3>Instance Id: ' >> /var/www/html/index.html
+curl http://169.254.169.254/latest/meta-data/instance-id >> /var/www/html/index.html
+echo '</h3> <h3>Public IP: ' >> /var/www/html/index.html
+curl http://169.254.169.254/latest/meta-data/public-ipv4 >> /var/www/html/index.html
+echo '</h3> <h3>Local IP: ' >> /var/www/html/index.html
+curl http://169.254.169.254/latest/meta-data/local-ipv4 >> /var/www/html/index.html
+echo '</h3></html> ' >> /var/www/html/index.html
+"
+}
