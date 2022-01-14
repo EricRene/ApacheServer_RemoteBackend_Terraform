@@ -226,7 +226,7 @@ resource "aws_instance" "web" {
   ami                    = "ami-001089eb624938d9f"
   instance_type          = "t2.micro"
   # subnet_id              = "aws_subnet.public_subnets[0]"
-  vpc_security_group_ids = [aws_security_group.web_server_sg.name]
+  vpc_security_group_ids = ["${aws_security_group.web_server_sg.name}]
   key_name               = "Task-9-KP"
 
 
